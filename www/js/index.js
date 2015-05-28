@@ -48,7 +48,7 @@ var app = {
             
             $.ajax({
                type: 'POST',
-               url: 'http://10.246.40.125:8010/pay',
+               url: 'http://YOUR-IP:8010/pay',//TODO YOUR-IP like 192.168.10.10
                data: JSON.stringify({
                     "channel": $(this).data('channel'),
                     "amount": $('#amount').val()*100
