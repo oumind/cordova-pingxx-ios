@@ -16,16 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var callback = {
-    success: function(message) {
-        alert(message);
-    },
-    
-    failure: function() {
-        alert("Error calling pingxx Plugin");
-    }
-}
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -55,7 +45,7 @@ var app = {
                 }),
                contentType: 'application/json',
                success: function(charge){
-                    pingxx.createPayment(JSON.stringify(charge), callback.success, callback.failure);
+                    pingxx.createPayment(charge);
                },
                error: function(xhr, type){
                    alert('Ajax error!')

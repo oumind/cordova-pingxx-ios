@@ -3,8 +3,8 @@ cordova.define("io.oumind.cordova.pingxx.pingxx", function(require, exports, mod
     var exec = require('cordova/exec');
     var pingxx = {};
     
-    pingxx.createPayment = function(charge, successCallback, errorCallback) {
-      exec(successCallback, errorCallback, "Pingxx", "createPayment", [charge]);
+    pingxx.createPayment = function(charge) {
+      exec(null, null, "Pingxx", "createPayment", [JSON.stringify(charge)]);
     };
     
     pingxx._finishPay = function(result, errorCode, errorMsg){
