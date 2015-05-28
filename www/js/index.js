@@ -16,6 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var callback = {
+    success: function(message) {
+        alert(message);
+    },
+    
+    failure: function() {
+        alert("Error calling pingxx Plugin");
+    }
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,18 +46,26 @@ var app = {
 
         $('.up').on('click', function(e){
             
-            var success = function(message) {
-                alert(message);
-            }
-            
-            var failure = function() {
-                alert("Error calling Hello Plugin");
-            }
-            
-            var msg = 'use ' + $(this).data('channel') + ' pay ' + $('#amount').val();
-            pingxx.createPayment(msg, success, failure);
+            $.ajax({
+               type: 'POST',
+               url: 'http://10.246.40.125:8010/pay',
+               data: JSON.stringify({
+                    "channel": $(this).data('channel'),
+                    "amount": $('#amount').val()*100
+                }),
+               contentType: 'application/json',
+               success: function(charge){
+                    pingxx.createPayment(JSON.stringify(charge), callback.success, callback.failure);
+               },
+               error: function(xhr, type){
+                   alert('Ajax error!')
+               }
+            });
         })
-
+        
+        $(document).on("pingxx-pay-finished", function(event){
+            alert(event.result);
+        },false);
     },
 };
 
