@@ -45,7 +45,7 @@ var app = {
                 }),
                contentType: 'application/json',
                success: function(charge){
-                    pingxx.createPayment(charge);
+                    pingxx.createPayment(charge, 'oumind');
                },
                error: function(xhr, type){
                    alert('Ajax error!')
